@@ -11,8 +11,8 @@ function Tanga(){
             <body className="Tanga-body">
                 <input onChange={(e) => {console.log(e.target.value)}} name="user"/>
                 <Output input={"current inventory; real inventory; order[volumes]; formulas; prices"} map={"optimize for: revenue or volume; exhaust inventory"}/>
-                <Forward input={"inventory; orders; prices"} map={"Maximize profit; exhaust inventory"}/>
-                <Reverse input={"inventory; orders; prices"} map={"Maximize profit; exhaust inventory"}/>
+                {/*<Forward input={"inventory; orders; prices"} map={"Maximize profit; exhaust inventory"}/>*/}
+                {/*<Reverse input={"inventory; orders; prices"} map={"Maximize profit; exhaust inventory"}/>*/}
             </body>
         </div>
     )
