@@ -1,17 +1,22 @@
 import Graph from "./Graph";
-
+import { Box, Center, Wrap } from "@chakra-ui/layout";
 
 function Output(props){
     return (
         <div>
             <header>
-                Bidirectional output
+            Interactive graph:
             </header>
             <body>
+                {/*
                 The value of the input: {props.input} <br />
                 Map: {props.map} <br />
-                Interactive graph: <br />
-                <Graph />
+                */}
+                <br />
+                {/*<Graph />*/}
+                <br />
+                
+            
             </body>
         </div>
     )
