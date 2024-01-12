@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { AgChartsReact } from 'ag-charts-react';
-import Data from './Data';
+import Data from '../Data/Data';
 import { Box, Center, Wrap } from "@chakra-ui/layout";
-import DataObject from './DataObject';
+import DataObject from '../Data/DataObject';
 
 function Graph2(){
     const [multa, SetMulta] = useState(0);
