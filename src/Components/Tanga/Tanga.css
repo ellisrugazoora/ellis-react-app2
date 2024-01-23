@@ -15,7 +15,7 @@
   */
   
   .Tanga-header {
-    background-color: #104cc3;
+    background-color: #282c34;
     
     height: fit-content;
     display: flex;
@@ -37,6 +37,17 @@
     color: rgb(255, 255, 255);
   }
   
+   .table {
+    color:#bc2626 
+  } 
+  .tablecont {
+    background-color: #ffffff; 
+    color:#010101
+  }
+  .tabs{
+    background-color:rgb(255, 255, 255);
+    color:#010101
+  }
   /*
   .Tanga-link {
     color: #61dafb;
