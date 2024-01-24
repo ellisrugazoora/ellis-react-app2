@@ -6,15 +6,15 @@ function TabsComp(props){
             <Tabs isFitted width={"100vw"} height={"100vh"}>
                 <TabList>
                     <Tab>{props.one.title}</Tab>
-                    <Tab>Two</Tab>
-                    <Tab>Three</Tab>
+                    <Tab>{props.two.title}</Tab>
+                    <Tab>{props.three.title}</Tab>
                     <Tab>{props.four.title}</Tab>
 
                 </TabList>
                 <TabPanels width={"50%"}>
                     <TabPanel> {props.one.content} </TabPanel>
-                    <TabPanel> {props.two} </TabPanel>
-                    <TabPanel> {props.three} </TabPanel>
+                    <TabPanel> {props.two.content} </TabPanel>
+                    <TabPanel> {props.three.content} </TabPanel>
                     <TabPanel>{props.four.content}</TabPanel>
                 </TabPanels>
             </Tabs>

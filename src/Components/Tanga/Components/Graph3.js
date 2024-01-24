@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { AgChartsReact } from 'ag-charts-react';
-import { Box, Center, Wrap } from "@chakra-ui/layout";
+import { Box, Center, HStack, Spacer, Wrap } from "@chakra-ui/layout";
 import DataObject from '../Data/DataObject';
 import DataFunction from '../Data/DataFunction';
 import testobj from '../Data/DataObject';
@@ -18,18 +18,26 @@ function Graph3(props){
     const [args, SetArgs] = useState(
         {iphone:0, mac:0, ipad:0, wearables:0,
         iphone_mass: 150, mac_mass: 50, ipad_mass: 50, wearables_mass: 50, //starting mass = f(starting inventory, init ratio)
-        bo1: 150, bo2: 140, bo3:130, ad1:140, ad2:150, ad3:145, //Starting inventory is a prop
+        bo1: 160, bo2: 140, bo3:130, ad1:100, ad2:150, ad3:145, //Starting inventory is a prop
         init_ratio: {iphone:1,mac:2,ipad:4,wearables:5},
         mode: "inventory",
         rel_abs: "absolute",
         formulas: {
-            iphone: {baseoil1: 1/6,baseoil2: 1/6,baseoil3: 1/6,additive1: 1/6,additive2: 1/6,additive3: 1/6},
-            mac: {baseoil1: 1/6,baseoil2: 1/6,baseoil3: 1/6,additive1: 1/6,additive2: 1/6,additive3: 1/6},
-            ipad: {baseoil1: 1/6,baseoil2: 1/6,baseoil3: 1/6,additive1: 1/6,additive2: 1/6,additive3: 1/6},
-            wearables: {baseoil1: 1/6,baseoil2: 1/6,baseoil3: 1/6,additive1: 1/6,additive2: 1/6,additive3: 1/6},
-        }
+            iphone: formula({baseoil1: 5, baseoil2: 4, baseoil3: 1, additive1: 2, additive2: 1, additive3: 0.5}),
+            mac: {baseoil1: 2/6,baseoil2: 3/6,baseoil3: 1/6,additive1: 2/6,additive2: 3/6,additive3: 1/6},
+            ipad: {baseoil1: 3/6,baseoil2: 2/6,baseoil3: 1/6,additive1: 1/6,additive2: 1/6,additive3: 1/6},
+            wearables: {baseoil1: 3/6,baseoil2: 2/6,baseoil3: 1/6,additive1: 1/6,additive2: 2/6,additive3: 1/6},
+        },
+        current_inv: {bo1: 0, bo2: 0, bo3: 0, ad1: 0, ad2: 0, ad3: 0}
         }
     );
+    function formula(object){
+        let sum = 0;
+        Object.entries(object).map((value, index) => {
+            sum = sum + value[1];
+        })
+        return {baseoil1: object.baseoil1/sum,baseoil2: object.baseoil2/sum,baseoil3: object.baseoil3/sum,additive1: object.additive1/sum,additive2: object.additive2/sum,additive3: object.additive3/sum}
+    }
     const [lowerbound, SetLowerbound] = useState({bo1: 0, bo2: 0, bo3: 0, ad1: 0, ad2: 0, ad3: 0})
     var chartOptions = {
         // Data: Data to be displayed in the chart
@@ -84,11 +92,12 @@ function Graph3(props){
         })
         console.log(args.rel_abs)
     };
-    function limiting_reagent(e){
+    function limiting_reagent(name){
         console.log("limitingreagent = f(spare_inventory, product, product_ratios)")
         console.log("red_indication: the inventory such that the entirety of its remainder can be used in the production of the product in question")
         let columns = ["baseoil1", "baseoil2", "baseoil3", "additive1", "additive2", "additive3"]
-        let prod = e.target.id;
+        let prod = name;
+        let result;
         for(let col = 0; col < columns.length; col++){
             //determine remainder
             let spare_inv = data(args)[columns[col]].spare; 
@@ -102,10 +111,12 @@ function Graph3(props){
                 }
             }
             if(condition === 6){
-                console.log(`The limited reagent: ${columns[col]} and the total mass: ${total + args.iphone_mass}`)
+                result = total + args[prod + "_mass"];
+                console.log(`The limited reagent: ${columns[col]} and the total mass: ${total + args[prod + "_mass"]}`)
                 break; //save the col. Thats the limiting reagent. and total is the total
             }
         }
+        return result
     }
     function tick(number, id){
         let new_val = parseInt(number, 10);
@@ -128,20 +139,42 @@ function Graph3(props){
         let id = e.target.id;
         let name = e.target.name;
         console.log(`Id: ${id}; Name: ${name}`)
+        if(id === 'max'){
+            let new_mass = Math.trunc(limiting_reagent(name));
+            
+            console.log(`Set max: new mass: ${new_mass}`)
+            SetArgs((current) => {
+                return {...current, [name + "_mass"]: new_mass}
+            });
+        }
     }
-
-    var table_columns = ["Products", "Quantity", "Fix", "Maximize"]
-    var table_data = {
-        proda: {col1: "Prod1", col2: <NumberInp prod="iphone" onChange={tick} init={args.iphone_mass} />, col3: <Button id='fix' name="iphone" onClick={tablebutton}>Fix</Button>, col4: <Button id='max' name='iphone' onClick={tablebutton}>Set Max</Button>},
-        prodb: {col1: "Prod1", col2: <NumberInp prod="mac" onChange={tick} init={args.mac_mass} />, col3: <Button id='fix' name='mac' onClick={tablebutton}>Fix</Button>, col4: <Button id='max' name='mac' onClick={tablebutton}>Set Max</Button>},
-        prodc: {col1: "Prod1", col2: <NumberInp prod="ipad" onChange={tick} init={args.ipad_mass} />, col3: <Button id='fix' name='ipad' onClick={tablebutton}>Fix</Button>, col4: <Button id='max' name='ipad' onClick={tablebutton}>Set Max</Button>},
-        prodd: {col1: "Prod1", col2: <NumberInp prod="wearables" onChange={tick} init={args.wearables_mass} />, col3: <Button id='fix' name='wearables' onClick={tablebutton}>Fix</Button>, col4: <Button id='max' name='wearables' onClick={tablebutton}>Set Max</Button>}
+    function inv_table(number, id){
+        let new_val = parseInt(number, 10);
+        SetArgs((old) => {
+            return {...old, current_inv: {...old.current_inv, [id]: new_val}}
+        })
     }
+    var prod_table_columns = ["Products", "Quantity", "Maximize"]
+    var prod_table_data = {
+        proda: {col1: "4T", col2: <NumberInp value={args.iphone_mass} prod="iphone" onChange={tick} init={args.iphone_mass} />, col4: <Button id='max' name='iphone' onClick={tablebutton}>Set Max</Button>},
+        prodb: {col1: "2T", col2: <NumberInp value={args.mac_mass} prod="mac" onChange={tick} init={args.mac_mass} />, col4: <Button id='max' name='mac' onClick={tablebutton}>Set Max</Button>},
+        prodc: {col1: "Sentry", col2: <NumberInp value={args.ipad_mass} prod="ipad" onChange={tick} init={args.ipad_mass} />, col4: <Button id='max' name='ipad' onClick={tablebutton}>Set Max</Button>},
+        prodd: {col1: "Duramax HD", col2: <NumberInp value={args.wearables_mass} prod="wearables" onChange={tick} init={args.wearables_mass} />, col4: <Button id='max' name='wearables' onClick={tablebutton}>Set Max</Button>}
+    }
+    var inv_table_columns = ["Inventory", "Required", "Current", "Difference"];
+    var inv_table_data = {
+        inv1: {col1: "500SN/600N", col2: data(args).baseoil1.sum.toFixed(2), col3: <NumberInp prod="bo1" init={0} onChange={inv_table} />, col4: args.current_inv.bo1 - args.bo1},
+        inv2: {col1: "150SN", col2: data(args).baseoil2.sum.toFixed(2), col3: <NumberInp prod="bo2" init={0} onChange={inv_table} />, col4: args.current_inv.bo2 - args.bo2},
+        inv3: {col1: "BS150", col2: data(args).baseoil3.sum.toFixed(2), col3: <NumberInp prod="bo3" init={0} onChange={inv_table} />, col4: args.current_inv.bo3 - args.bo3},
+        inv4: {col1: "PPD", col2: data(args).additive1.sum.toFixed(2), col3: <NumberInp prod="ad1" init={0} onChange={inv_table} />, col4: args.current_inv.ad2 - args.ad1},
+        inv5: {col1: "GOA", col2: data(args).additive2.sum.toFixed(2), col3: <NumberInp prod="ad2" init={0} onChange={inv_table} />, col4: args.current_inv.ad2 - args.ad2},
+        inv6: {col1: "VII", col2: data(args).additive3.sum.toFixed(2), col3: <NumberInp prod="ad3" init={0} onChange={inv_table} />, col4: args.current_inv.ad3 - args.ad3},
+    };
     return (
         <div>
+            {/* <Button onClick={(e) => {console.log("change ")}}>Test tab creation</Button>
             <Button onClick={handle_toggle_mode}>Inventory or prod mode</Button>
-            <Button onClick={handle_toggle_rel_abs}>Relative/absolute</Button> Current mode: {args.rel_abs}
-            <Button id='iphone' onClick={limiting_reagent}>Limiting Reagent</Button>
+            <Button onClick={handle_toggle_rel_abs}>Relative/absolute</Button> Current mode: {args.rel_abs} */}
             <br />
             <Center>
                 <Box bg='white' padding={3} border={"1px"} borderRadius='15px' width='-moz-min-content' height='fit-content'>
@@ -151,16 +184,12 @@ function Graph3(props){
                 </Box>
             </Center>
             <Center>
-                <TaBle columns={table_columns} data={table_data} />
+                <HStack spacing='10px'>
+                    <TaBle title="Products" columns={prod_table_columns} data={prod_table_data} />
+                    <TaBle title="Inventory" columns={inv_table_columns} data={inv_table_data} />
+                </HStack>
             </Center>
             
-            Call for action: <br />
-            - How much additive and inventory to order = f(target output) <br />
-
-            Projection: <br />
-            - constrain each product output: fix; cap; range; lower bound
-            - Display of live total output
-            - Total output / target output
         </div>
     )
 }

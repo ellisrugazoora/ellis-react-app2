@@ -36,8 +36,8 @@ function Tanga(){
             </header>
             <Box className="Tanga-body">
                 <TabsComp one={{title: "January",content: <Graph3 title="Jan" />}} 
-                    two={<Graph3 title="Feb" />} 
-                    three={<Graph3 title="Mar" />} 
+                    two={{title: "February",content: <Graph3 title="Feb" />}} 
+                    three={{title: "March",content: <Graph3 title="Mar" />}}
                     four={{title: "test tab", 
                         content: <TaBle columns={["column1", "column2", "column3"]} 
                         data={{row1: {col1: 1, col2: 2,col3: 3}, row2: {col1: 4, col2: 5,col3: 6}, row3: {col1: 7, col2: 8, col3: 9}}} />}} />
