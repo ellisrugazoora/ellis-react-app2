@@ -8,7 +8,7 @@ function TaBle(props){
         <div>
             {props.title}
             <Center>
-            <TableContainer className="tablecdont" border={"0.5px outset"} borderRadius={"10px"}>
+            <TableContainer className="tablecdont" border={"0.5px outset"} borderRadius={"10px"} shadow={'lg'}>
                 <Table variant='striped' colorScheme='twitter' size='sm'>
                     <TableCaption>Imperial to metric conversion factors</TableCaption>
                     
@@ -20,13 +20,6 @@ function TaBle(props){
                         </Tr>
                     </Thead>
                     <Tbody>
-                            {/* {Object.entries(TestObject_col).map((row, rownum) => {
-                                return (
-                                    <Tr>{row[1].map((data, rownum) => {
-                                        return (<Td>{data}</Td>)
-                                    })}</Tr>
-                                )
-                            })} */}
                             {
                                 Object.entries(props.data).map((row, rownum) => {
                                     return (<Tr>{Object.entries(row[1]).map((col, colnum) => {
