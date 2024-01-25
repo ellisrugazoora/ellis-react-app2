@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { AgChartsReact } from 'ag-charts-react';
-import { Box, Center, HStack, Spacer, VStack, Wrap } from "@chakra-ui/layout";
+import { Box, Center, HStack, Spacer, VStack, Wrap, Flex } from "@chakra-ui/layout";
 import DataObject from '../Data/DataObject';
 import DataFunction from '../Data/DataFunction';
 import testobj from '../Data/DataObject';
@@ -12,6 +12,7 @@ import NumberInp from './NumberInp';
 import TestTab from './TaBle';
 import TaBle from './TaBle';
 import { NumberInput, NumberInputField } from '@chakra-ui/react';
+
 
 function Graph3(props){
     
@@ -199,13 +200,12 @@ function Graph3(props){
             </Center>
             
             <Center>
-                <HStack spacing={'10px'}>
-                    <Box><TaBle title="Products" columns={prod_table_columns} data={prod_table_data} /></Box>
-                    <Box><TaBle title="Inventory" columns={inv_table_columns} data={inv_table_data} /></Box>
-                </HStack>
-            </Center> 
-
-            
+                <Flex width='80%'>
+                    <TaBle title="Products" columns={prod_table_columns} data={prod_table_data} />
+                    <Spacer />
+                    <TaBle title="Inventory" columns={inv_table_columns} data={inv_table_data} />
+                </Flex>
+            </Center>
         </div>
     )
 }
