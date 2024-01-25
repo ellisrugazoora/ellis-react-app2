@@ -19,36 +19,46 @@ function Graph3(props){
     var data = DataFunction;
     const [args, SetArgs] = useState(
         {
-        bo1: 600, bo2: 600, bo3:200, bo4: 200, bo5: 200, bo6: 200, ad1:200, ad2:200, ad3:200, ad4:200, ad5: 200, ad6: 200, ad7: 200, ad8: 200, ad9:200, ad10: 200, ad11: 200, ad12: 200, //Starting inventory is a prop
+        bo1: 1500, bo2: 900, bo3:600, bo4: 200, bo5: 200, bo6: 200, ad1:200, ad2:200, ad3:200, ad4:200, ad5: 200, ad6: 200, ad7: 200, ad8: 200, ad9:200, ad10: 200, ad11: 200, ad12: 200, //Starting inventory is a prop
         formulas: {
-            _2T: {bo1:0.9050,bo2:0,bo3:0, bo4:0, bo5:0.08, bo6:1/18, bo7:0.002, ad1:1/18, ad2:1/18, ad3:1/18, ad4:1/18, ad5:1/18, ad6:1/18, ad7:1/18, ad8:1/18, ad9:1/18, ad10:1/18, ad11:1/18, ad12:1/18},
-            _4T: {bo1:0.8370,bo2:0,bo3:1/18, bo4:1/18, bo5:1/18, bo6:1/18, bo7:0, ad1:1/18, ad2:1/18, ad3:1/18, ad4:1/18, ad5:1/18, ad6:1/18, ad7:1/18, ad8:1/18, ad9:1/18, ad10:1/18, ad11:1/18, ad12:1/18},
-            atfIII: {bo1:1/18,bo2:1/18,bo3:1/18, bo4:1/18, bo5:1/18, bo6:1/18,bo7:0, ad1:1/18, ad2:1/18, ad3:1/18, ad4:1/18, ad5:1/18, ad6:1/18, ad7:1/18, ad8:1/18, ad9:1/18, ad10:1/18, ad11:1/18, ad12:1/18},
-            DuramaxHD:{bo1:1/18,bo2:1/18,bo3:1/18, bo4:1/18, bo5:1/18, bo6:1/18,bo7:0, ad1:1/18, ad2:1/18, ad3:1/18, ad4:1/18, ad5:1/18, ad6:1/18, ad7:1/18, ad8:1/18, ad9:1/18, ad10:1/18, ad11:1/18, ad12:1/18}, 
-            FrontiaX:{bo1:1/18,bo2:1/18,bo3:1/18, bo4:1/18, bo5:1/18, bo6:1/18,bo7:0, ad1:1/18, ad2:1/18, ad3:1/18, ad4:1/18, ad5:1/18, ad6:1/18, ad7:1/18, ad8:1/18, ad9:1/18, ad10:1/18, ad11:1/18, ad12:1/18},
-            Geo80W90:{bo1:1/18,bo2:1/18,bo3:1/18, bo4:1/18, bo5:1/18, bo6:1/18,bo7:0, ad1:1/18, ad2:1/18, ad3:1/18, ad4:1/18, ad5:1/18, ad6:1/18, ad7:1/18, ad8:1/18, ad9:1/18, ad10:1/18, ad11:1/18, ad12:1/18},
-            Geo85W140:{bo1:1/18,bo2:1/18,bo3:1/18, bo4:1/18, bo5:1/18, bo6:1/18,bo7:0, ad1:1/18, ad2:1/18, ad3:1/18, ad4:1/18, ad5:1/18, ad6:1/18, ad7:1/18, ad8:1/18, ad9:1/18, ad10:1/18, ad11:1/18, ad12:1/18},
-            Hydrax32:{bo1:1/18,bo2:1/18,bo3:1/18, bo4:1/18, bo5:1/18, bo6:1/18,bo7:0, ad1:1/18, ad2:1/18, ad3:1/18, ad4:1/18, ad5:1/18, ad6:1/18, ad7:1/18, ad8:1/18, ad9:1/18, ad10:1/18, ad11:1/18, ad12:1/18},
-            HydraxZ46:{bo1:1/18,bo2:1/18,bo3:1/18, bo4:1/18, bo5:1/18, bo6:1/18,bo7:0, ad1:1/18, ad2:1/18, ad3:1/18, ad4:1/18, ad5:1/18, ad6:1/18, ad7:1/18, ad8:1/18, ad9:1/18, ad10:1/18, ad11:1/18, ad12:1/18},
-            HydraxZ68:{bo1:1/18,bo2:1/18,bo3:1/18, bo4:1/18, bo5:1/18, bo6:1/18,bo7:0, ad1:1/18, ad2:1/18, ad3:1/18, ad4:1/18, ad5:1/18, ad6:1/18, ad7:1/18, ad8:1/18, ad9:1/18, ad10:1/18, ad11:1/18, ad12:1/18},
-            PowerTransSP150:{bo1:1/18,bo2:1/18,bo3:1/18, bo4:1/18, bo5:1/18, bo6:1/18,bo7:0, ad1:1/18, ad2:1/18, ad3:1/18, ad4:1/18, ad5:1/18, ad6:1/18, ad7:1/18, ad8:1/18, ad9:1/18, ad10:1/18, ad11:1/18, ad12:1/18},
-            PowerTransSP220:{bo1:1/18,bo2:1/18,bo3:1/18, bo4:1/18, bo5:1/18, bo6:1/18,bo7:0, ad1:1/18, ad2:1/18, ad3:1/18, ad4:1/18, ad5:1/18, ad6:1/18, ad7:1/18, ad8:1/18, ad9:1/18, ad10:1/18, ad11:1/18, ad12:1/18},
-            PowerTransSP320:{bo1:1/18,bo2:1/18,bo3:1/18, bo4:1/18, bo5:1/18, bo6:1/18,bo7:0, ad1:1/18, ad2:1/18, ad3:1/18, ad4:1/18, ad5:1/18, ad6:1/18, ad7:1/18, ad8:1/18, ad9:1/18, ad10:1/18, ad11:1/18, ad12:1/18},
-            Sb22D210:{bo1:1/18,bo2:1/18,bo3:1/18, bo4:1/18, bo5:1/18, bo6:1/18,bo7:0, ad1:1/18, ad2:1/18, ad3:1/18, ad4:1/18, ad5:1/18, ad6:1/18, ad7:1/18, ad8:1/18, ad9:1/18, ad10:1/18, ad11:1/18, ad12:1/18},
-            SentryHDSae40:{bo1:1/18,bo2:1/18,bo3:1/18, bo4:1/18, bo5:1/18, bo6:1/18,bo7:0, ad1:1/18, ad2:1/18, ad3:1/18, ad4:1/18, ad5:1/18, ad6:1/18, ad7:1/18, ad8:1/18, ad9:1/18, ad10:1/18, ad11:1/18, ad12:1/18},
-            TurbofleetSae15W:{bo1:1/18,bo2:1/18,bo3:1/18, bo4:1/18, bo5:1/18, bo6:1/18,bo7:0, ad1:1/18, ad2:1/18, ad3:1/18, ad4:1/18, ad5:1/18, ad6:1/18, ad7:1/18, ad8:1/18, ad9:1/18, ad10:1/18, ad11:1/18, ad12:1/18}
+            _2T: populateformula({bo1:0.9050, bo5:0.08, ad9:0.0150}),
+            _4T: populateformula({bo1:0.8370,bo3:0.0530,ad2:0.002, ad5:0.0500, ad7:0.0580}),
+            atfIII: populateformula({bo2:0.6097,bo4:0.3,ad8:0.09,ad11:0.0003}),
+            DuramaxHD: populateformula({bo1:0.7780, bo3:0.1720,ad1:0.006,ad6:0.0440}), 
+            FrontiaX: populateformula({bo1:0.6238, bo2:0.2442, ad2:0.002,ad5:0.0760,ad7:0.0540}),
+            Geo80W90:populateformula({bo1:0.7600,bo3:0.2050,ad2:0.015,ad4:0.02}),
+            Geo85W140:populateformula({bo1:0.030,bo3:0.927,ad2:0.003,ad4:0.0400}),
+            Hydrax32:populateformula({bo2:0.9895,ad2:0.002,ad10:0.0085}),
+            HydraxZ46:populateformula({bo1:0.2905,bo2:0.7,ad2:0.001,ad10:0.0085}),
+            HydraxZ68:populateformula({bo1:0.6805,bo2:0.31,ad2:0.001,ad10:0.0085}),
+            PowerTransSP150:populateformula({bo1:0.7650,bo3:0.22,ad4:0.0150}),
+            PowerTransSP220:populateformula({bo1:0.4629,bo3:0.5201,ad2:0.002,ad4:0.0150}),
+            PowerTransSP320:populateformula({bo1:0.17, bo3:0.8130,ad2:0.002,ad4:0.0150}),
+            Sb22D210:populateformula({bo2:0.9,bo4:0.1}),
+            SentryHDSae40:populateformula({bo1:0.7830,bo3:0.1800,ad1:0.003,ad6:0.0340}),
+            TurbofleetSae15W:populateformula({bo1:0.3810,bo2:0.42,ad2:0.002,ad3:0.1170,ad5:0.08})
         },
         _2T:180, _4T:180,atfIII: 180,DuramaxHD:180, FrontiaX:180,Geo80W90:180,Geo85W140:180,Hydrax32:180,HydraxZ46:180,HydraxZ68:180,PowerTransSP150:180,PowerTransSP220:180,PowerTransSP320:180,Sb22D210:180,SentryHDSae40:180,TurbofleetSae15W:180
         }
     );
-
+    
+    function populateformula(obj){
+        let result = {bo1:0,bo2:0,bo3:0,bo4:0,bo5:0,bo6:0,bo7:0,ad1:0,ad2:0,ad3:0,ad4:0,ad5:0,ad6:0,ad7:0,ad8:0,ad9:0,ad10:0,ad11:0,ad12:0,ad13:0};
+        for (const key in obj) {
+            result[key] = obj[key];
+            // if (Object.hasOwnProperty(obj)) {
+            //     result[key] = obj[key];
+            // }
+        }
+        return result;
+    }
     var chartOptions = {
         // Data: Data to be displayed in the chart
     title: {
         text: `Mogas LOBP Production projection ${props.title}`,
     },
     data: [ //each object is a group (stacked or not)
-        data(args).bo1, data(args).bo2, data(args).bo3, data(args).bo5, data(args).ad1,data(args).ad2,data(args).ad3, 
+        data(args).bo1, data(args).bo2, data(args).bo3, data(args).bo4,data(args).bo5, data(args).ad1,data(args).ad2,data(args).ad3, 
         data(args).ad4, data(args).ad5, data(args).ad6, data(args).ad7, data(args).ad8, data(args).ad9,
         data(args).ad10, data(args).ad11, data(args).ad12 //I should make this a fnx({args})
         //DataFunction({args}).baseoil, 
@@ -172,8 +182,8 @@ function Graph3(props){
     var inv_table_data = {
         inv1: {col1: "500SN/600N", col2: data(args).bo1.sum.toFixed(2), col3: <NumberInp prod="bo1" init={args.bo1} onChange={inv_table} value={args.bo1} />, col4: (args.bo1 - data(args).bo1.sum).toFixed(2)},
         inv2: {col1: "150SN", col2: data(args).bo2.sum.toFixed(2), col3: <NumberInp prod="bo2" init={args.bo2} onChange={inv_table} value={args.bo2} />, col4: (args.bo2 - data(args).bo2.sum).toFixed(2)},
-        inv3: {col1: "BS150", col2: data(args).bo3.sum.toFixed(2), col3: <NumberInp prod="bo3" init={args.bo3} onChange={inv_table} value={args.bo3} />, col4: (args.bo3 - data(args).bo3.sum).toFixed(2)},
-        inv4: {col1: "SN80/SN100", col2: data(args).bo4.sum.toFixed(2), col3: <NumberInp prod="bo4" init={args.bo4} onChange={inv_table} value={args.bo4} />, col4: (args.bo4 - data(args).bo4.sum).toFixed(2)},
+        inv4: {col1: "BS150", col2: data(args).bo3.sum.toFixed(2), col3: <NumberInp prod="bo3" init={args.bo3} onChange={inv_table} value={args.bo3} />, col4: (args.bo3 - data(args).bo3.sum).toFixed(2)},
+        inv6: {col1: "SN80/SN100", col2: data(args).bo4.sum.toFixed(2), col3: <NumberInp prod="bo4" init={args.bo4} onChange={inv_table} value={args.bo4} />, col4: (args.bo4 - data(args).bo4.sum).toFixed(2)},
         inv5: {col1: "DPK", col2: data(args).bo5.sum.toFixed(2), col3: <NumberInp prod="bo5" init={args.bo5} onChange={inv_table} value={args.bo5} />, col4: (args.bo5 - data(args).bo5.sum).toFixed(2)},
         
         inv6: {col1: "TBN+", col2: data(args).ad1.sum.toFixed(2), col3: <NumberInp prod="ad1" init={args.ad1} onChange={inv_table} value={args.ad1} />, col4: (args.ad1 - data(args).ad1.sum).toFixed(2)},

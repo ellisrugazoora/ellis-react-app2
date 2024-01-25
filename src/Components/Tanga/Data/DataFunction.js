@@ -367,7 +367,7 @@ function DataFunction(mult){
         TurbofleetSae15W:val("TurbofleetSae15W", "ad12")
     },
     ad13: {
-        quarter: "TURB",
+        quarter: "TM PA",
         _2T: val("_2T", "ad13"),
         _4T: val("_4T", "ad13"),
         spare: mult.ad12 - total("ad13"),
