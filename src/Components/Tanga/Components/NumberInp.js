@@ -5,7 +5,7 @@ function NumberInp(props){
         props.onChange(number, props.prod);
     }
     return (
-        <NumberInput defaultValue={props.init} onChange={handlechange} value={props.value} >
+        <NumberInput defaultValue={props.init} onChange={handlechange} value={props.value} width={'150px'}>
             <NumberInputField bg={"white"} />
             <NumberInputStepper>
                 <NumberIncrementStepper />

@@ -7,9 +7,9 @@ function TaBle(props){
     return (
         <div>
             {props.title}
-            <Center>
+            
             <TableContainer className="tablecdont" border={"0.5px outset"} borderRadius={"10px"} shadow={'lg'}>
-                <Table variant='striped' colorScheme='twitter' size='sm'>
+                <Table variant='striped' colorScheme='twitter' size='sm' >
                     <TableCaption>Imperial to metric conversion factors</TableCaption>
                     
                     <Thead>
@@ -31,7 +31,7 @@ function TaBle(props){
                     </Tbody>
                 </Table>
             </TableContainer>
-            </Center>
+            
         </div>
     )
 }
