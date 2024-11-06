@@ -1,7 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 function StockApp() {
+  
   const [input, setInput] = useState('');
   const [response, setResponse] = useState('');
   function sendMessage(e){
