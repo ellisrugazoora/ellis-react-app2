@@ -6,14 +6,15 @@ import StockApp from "./Components/StockApp";
 import Music from './Components/Music/Music';
 
 import { Box, ChakraBaseProvider, ChakraProvider } from '@chakra-ui/react';
+import Chat from './Components/Chat';
 
 function App() {
-  var display = {a: <StockApp />, b: <Tanga />, c: <Music />}
+  var display = {a: <StockApp />, b: <Tanga />, c: <Music />, d: <Chat />}
   return (
     <ChakraProvider>
       
       <Box className="App" width={"100%"}>
-        {display.a}
+        {display.d}
       </Box>
       
     </ChakraProvider>

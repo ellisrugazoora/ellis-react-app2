@@ -7,10 +7,9 @@ function StockApp() {
   const [input, setInput] = useState('');
   const [response, setResponse] = useState('');
   function sendMessage(e){
-    console.log(e.target)
+    console.log(input)
     let res = "Response to: " + input;
     setResponse(res)
-    console.log("Send message")
   }
   return (
     <div className="StockApp">
