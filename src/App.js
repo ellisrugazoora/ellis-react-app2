@@ -13,7 +13,7 @@ function App() {
     <ChakraProvider>
       
       <Box className="App" width={"100%"}>
-        {display.b}
+        {display.a}
       </Box>
       
     </ChakraProvider>
