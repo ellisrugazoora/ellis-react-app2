@@ -8,7 +8,7 @@ const Chat = () => {
   const sendMessage = async () => {
     try {
       const apiUrl = 'https://api.openai.com/v1/chat/completions';
-      const apiKey = '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';
+      const apiKey = process.env.CHAT_GPT_API_KEY;
   
       const headers = {
         'Content-Type': 'application/json',
