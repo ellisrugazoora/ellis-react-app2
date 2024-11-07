@@ -10,7 +10,7 @@ const ChatOpenAInpm = () => {
   const [error, setError] = useState(null);
   //heelo test
   // Ensure to set the API key in your .env file (e.g. REACT_APP_OPENAI_API_KEY)
-   const Key = process.env.REACT_APP_OPENAI_API_KEY;
+   const Key = process.env.OPENAI_API_KEY;
    
   const openai = new OpenAI({
     apiKey: Key,
@@ -50,7 +50,7 @@ const ChatOpenAInpm = () => {
           // disabled={loading}
         />
         <Button onClick={handleSubmit} disabled={loading}>Send</Button>
-        <Button onClick={()=>{console.log(process.env.REACT_APP_OPENAI_API_KEY)}}>Print key</Button>
+        <Button onClick={()=>{console.log(process.env.OPENAI_API_KEY)}}>Print key</Button>
       {/* </form> */}
 
       {loading && <p>Loading...</p>}
