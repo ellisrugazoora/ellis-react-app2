@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { OpenAI } from 'openai';
 import { Button } from '@chakra-ui/react';
+// import { configDotenv } from 'dotenv';
 
 const ChatOpenAInpm = () => {
   
@@ -10,7 +11,7 @@ const ChatOpenAInpm = () => {
   const [error, setError] = useState(null);
   //heelo test
   // Ensure to set the API key in your .env file (e.g. REACT_APP_OPENAI_API_KEY)
-   const Key = process.env.OPENAI_API_KEY;
+   const Key = process.env.REACT_APP_OPENAI_API_KEY;
    
   const openai = new OpenAI({
     apiKey: Key,
